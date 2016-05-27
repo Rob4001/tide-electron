@@ -110,6 +110,17 @@ class TingappRegularFile extends TingappFile {
       }
     }
 
+    addFile(source){
+      this.parent.addFile(source);
+    }
+
+    newFile(name){
+      this.parent.newFile(name);
+    }
+
+    newFolder(name){
+      this.parent.newFolder(name);
+    }
 
 }
 
@@ -181,6 +192,14 @@ class TingappFolder extends TingappFile {
 
     addFile(source){
       fsextra.copySync(source,path.join(this.path,path.basename(source)));
+    }
+
+    newFile(name){
+
+    }
+
+    newFolder(name){
+      fs.mkdir(path.join(this.path,name));
     }
 }
 
