@@ -195,7 +195,7 @@ class TingappFolder extends TingappFile {
     }
 
     newFile(name){
-
+      fs.writeFile(path.join(this.path,name),"");
     }
 
     newFolder(name){
