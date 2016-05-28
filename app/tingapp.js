@@ -45,6 +45,10 @@ class TingappFile {
     wasRemoved() {
         this.parent = null;
     }
+
+    rename(newname){
+      fs.rename(this.path,path.join(this.parent.path,newname));
+    }
 }
 
 class TingappRegularFile extends TingappFile {

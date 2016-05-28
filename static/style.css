@@ -167,7 +167,7 @@ option {
   font: normal normal normal 14px/1 FontAwesome;
   -webkit-font-smoothing: antialiased;
   padding: 0 4px;
-  
+
   visibility: hidden;
   transition: transform 0.2s;
 }
@@ -286,10 +286,26 @@ screen and (min-resolution: 1.0dppx) {
   background-image: url(../img/grid-background.png);
 
   display: flex;
-  align-items: center;  
+  align-items: center;
   justify-content: center;
 }
 
 #image-viewer > img {
   box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.file-name-editor {
+  margin: 0;
+  width: 50%;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+  padding: .5px;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+  background: #333434;
+  color:inherit;  
+}
+.file-name-editor:focus {
+  outline: none;
 }

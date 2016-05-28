@@ -10,9 +10,10 @@
           v-bind:class="{'folder-open': folderOpen}"
           v-on:click="toggleFolderOpen"></span>
       <span class="file-icon file-icon-{{file.type}}"></span>
-      <span class="file-name">
+      <span class="file-name" v-show="!renaming">
         {{file.name}}
       </span>
+      <input class="file-name-editor" type="text" v-show="renaming" value="{{file.name}}" @keyup.enter="rename" @keyup.esc="cancelRename">
     </div>
     <ul class="filetree" v-if="isFolder" v-show="folderOpen">
       <template v-for="child in file.files">
@@ -27,7 +28,8 @@
   import {remote} from 'electron';
   const {Menu,MenuItem,dialog} =  remote;
 
-  function generateFileMenu(file){
+  function generateFileMenu(component){
+    var file = component.file;
     var fileMenu = new Menu();
     fileMenu.append(new MenuItem({
       label: 'New File',
@@ -59,7 +61,7 @@
     fileMenu.append(new MenuItem({
       label: 'Rename',
       click: function(evt) {
-          //TODO: Implement
+          component.renaming = true;
       }
     }));
 
@@ -81,7 +83,8 @@
       return {
         folderOpen: false,
         selected: false,
-      }
+        renaming: false,
+      };
     },
     methods: {
       toggleFolderOpen: function (event) {
@@ -110,6 +113,13 @@
         event.preventDefault();
         event.stopPropagation();
         this.fileMenu.popup(remote.getCurrentWindow());
+      },
+      rename: function(event){
+        this.file.rename(event.target.value);
+        this.$destroy();
+      },
+      cancelRename: function(event){
+        this.renaming = false;
       }
     },
     events: {
@@ -126,7 +136,7 @@
         return (this.file.type == 'folder');
       },
       fileMenu: function(){
-        return generateFileMenu(this.file);
+        return generateFileMenu(this);
       }
     }
   }
