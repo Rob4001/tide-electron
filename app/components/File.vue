@@ -25,7 +25,7 @@
 <script>
   import {TingappFolder} from '../tingapp.js';
   import {remote} from 'electron';
-  const {Menu,MenuItem} =  remote;
+  const {Menu,MenuItem,dialog} =  remote;
 
   function generateFileMenu(file){
     var fileMenu = new Menu();
@@ -42,7 +42,16 @@
         file.newFolder("NewFolder");
       }
     }));
-
+    fileMenu.append(new MenuItem({
+      label: 'Import File',
+      click: function(evt) {
+        dialog.showOpenDialog({properties:['openFile']},function(files){
+          for(var i in files){
+            file.addFile(files[i]);
+          }
+        });
+      }
+    }));
     fileMenu.append(new MenuItem({
       type: 'separator'
     }));
