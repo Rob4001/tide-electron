@@ -15,11 +15,6 @@ cache:
   - "$HOME/.electron"
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    - llvm-toolchain-precise-3.7
-    packages:
-    - libgnome-keyring-dev
     - icnsutils
     - clang-3.7
     - graphicsmagick
