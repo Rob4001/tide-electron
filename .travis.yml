@@ -15,8 +15,8 @@ cache:
   - "$HOME/.electron"
 addons:
   apt:
+    packages:
     - icnsutils
-    - clang-3.7
     - graphicsmagick
     - xz-utils
     - rpm
