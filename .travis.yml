@@ -48,7 +48,7 @@ install:
 - npm install electron-builder@next
 - npm install
 - npm prune
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then scripts/bundlePython.sh; fi
+- scripts/bundlePython.sh
 script:
 - npm run dist
 branches:
